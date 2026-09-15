@@ -1,0 +1,7 @@
+node_modules
+dist
+.DS_Store
+.vercel
+
+# original sample photos (the site uses the resized copies in public/samples)
+/*.JPG
