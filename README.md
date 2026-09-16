@@ -72,5 +72,9 @@ src/components/         Navbar, Hero, Pricing, Gallery, Lightbox,
 
 ## How ordering works
 
-There's no server or database needed. The order form builds a message with the customer's
-details and opens it in their **email app** (or **WhatsApp**, if you add a number).
+The order form sends each order (with the customer's photos) straight to the email in
+`src/config.js` using **FormSubmit** (https://formsubmit.co), a free service that needs no account.
+
+**First time only:** after the first test order, FormSubmit emails that inbox an
+**"Activate Form"** message (check Spam too). Click **Activate**, and every order after that is delivered.
+You may be asked to activate once more when the live Vercel site sends its first order.
