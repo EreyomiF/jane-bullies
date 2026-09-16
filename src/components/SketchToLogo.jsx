@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SectionHeading from './SectionHeading.jsx'
 import { ArrowRight } from './Icons.jsx'
+import Img from './Img.jsx'
 
 const LOGOS = [
   { name: 'Dreamville Kennels', sketch: '/samples/logo-dreamville-sketch.jpg', final: '/samples/logo-dreamville.jpg' },
@@ -13,7 +14,7 @@ export default function SketchToLogo() {
 
   return (
     <section className="relative overflow-hidden py-20 sm:py-28">
-      <div aria-hidden className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-gold-2/15 blur-[120px]" />
+      <div aria-hidden className="pointer-events-none absolute -left-60 top-0 h-[36rem] w-[36rem] bg-[radial-gradient(closest-side,rgba(245,158,11,0.16),transparent)]" />
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.4fr] lg:px-8">
         <div>
           <SectionHeading center={false} eyebrow="Kennel logos" title={<>From sketch to <span className="text-gold-gradient">signature</span></>}>
@@ -43,7 +44,7 @@ export default function SketchToLogo() {
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-5">
           <figure>
             <div className="aspect-square overflow-hidden rounded-2xl border border-white/10 bg-white">
-              <img key={logo.sketch} src={logo.sketch} alt={`${logo.name} logo pencil sketch`} loading="lazy" className="h-full w-full object-cover" />
+              <Img key={logo.sketch} src={logo.sketch} alt={`${logo.name} logo pencil sketch`} loading="lazy" className="h-full w-full object-cover" />
             </div>
             <figcaption className="mt-3 text-center text-xs font-bold uppercase tracking-wider text-zinc-400">1 · Sketch</figcaption>
           </figure>
@@ -52,7 +53,7 @@ export default function SketchToLogo() {
           </span>
           <figure>
             <div className="aspect-square overflow-hidden rounded-2xl border border-gold/40 shadow-[0_0_50px_-15px] shadow-gold/50">
-              <img key={logo.final} src={logo.final} alt={`${logo.name} final colour logo`} loading="lazy" className="h-full w-full object-cover" />
+              <Img key={logo.final} src={logo.final} alt={`${logo.name} final colour logo`} loading="lazy" className="h-full w-full object-cover" />
             </div>
             <figcaption className="mt-3 text-center text-xs font-bold uppercase tracking-wider text-gold">2 · Final</figcaption>
           </figure>

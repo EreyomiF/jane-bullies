@@ -10,11 +10,10 @@ export const BRAND = {
 
 // Leave a value as '' to hide that contact option on the site.
 export const CONTACT = {
-  instagram: 'janebullies',          // Instagram username, without the @
-  email: 'hello@janebullies.com',    // where order requests are sent
+  email: 'janebully461@gmail.com',   // where order requests are sent
   whatsapp: '',                      // international format, digits only, e.g. '15551234567'
   facebook: '',                      // full Facebook page URL
-  tiktok: '',                        // TikTok username, without the @
+  tiktok: 'janebullies',             // TikTok username, without the @
 }
 
 export const PAYMENT_METHODS = ['PayPal', 'Apple Pay', 'Gift Cards']
@@ -32,7 +31,7 @@ export const SERVICES = [
       'Custom themed background',
       "Your dog's name in statement lettering",
       'Kennel name & social handle added',
-      'Sized for Instagram & Facebook',
+      'Sized for social media posts',
     ],
     image: '/samples/stud-honeygram.jpg',
   },
@@ -46,7 +45,7 @@ export const SERVICES = [
       'Pairing title with custom lettering',
       'Full scene or location theme',
       'Kennel name & social handle added',
-      'Sized for Instagram & Facebook',
+      'Sized for social media posts',
     ],
     image: '/samples/breeding-crossova-ritalin-fire.jpg',
     featured: true,

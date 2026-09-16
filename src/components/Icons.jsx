@@ -21,9 +21,9 @@ export const Plus = (p) => (
 export const Menu = (p) => (
   <svg viewBox="0 0 24 24" width="26" height="26" {...base} {...p}><path d="M4 7h16M4 12h16M4 17h16" /></svg>
 )
-export const Instagram = (p) => (
-  <svg viewBox="0 0 24 24" width="20" height="20" {...base} {...p}>
-    <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+export const TikTok = (p) => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" {...p}>
+    <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.4-2.47V9.68a5.73 5.73 0 0 0-.8-.06 5.7 5.7 0 0 0-5.7 5.7 5.7 5.7 0 0 0 5.7 5.68 5.7 5.7 0 0 0 5.69-5.69V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.3 4.3 0 0 1-3.25-1.48z" />
   </svg>
 )
 export const Mail = (p) => (

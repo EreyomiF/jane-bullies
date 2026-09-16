@@ -9,11 +9,10 @@ Open **`src/config.js`** and replace the placeholder contact info:
 
 ```js
 export const CONTACT = {
-  instagram: 'janebullies',          // ← your real Instagram username
-  email: 'hello@janebullies.com',    // ← your real email (order requests go here)
+  email: 'janebully461@gmail.com',    // ← your real email (order requests go here)
   whatsapp: '',                      // ← e.g. '15551234567' (leave '' to hide)
   facebook: '',
-  tiktok: '',
+  tiktok: 'janebullies',
 }
 ```
 
@@ -74,5 +73,4 @@ src/components/         Navbar, Hero, Pricing, Gallery, Lightbox,
 ## How ordering works
 
 There's no server or database needed. The order form builds a message with the customer's
-details and opens it in their **email app**, **WhatsApp** (if you add a number) or copies it
-and opens an **Instagram DM** to you.
+details and opens it in their **email app** (or **WhatsApp**, if you add a number).

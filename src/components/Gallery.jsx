@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { SAMPLES, CATEGORIES } from '../data/samples.js'
 import SectionHeading from './SectionHeading.jsx'
 import Lightbox from './Lightbox.jsx'
+import Img from './Img.jsx'
 
 const LABELS = { stud: 'Stud banner', breeding: 'Breeding banner', logo: 'Logo', custom: 'Custom' }
 
@@ -49,11 +50,11 @@ export default function Gallery() {
                 onClick={() => setOpenIndex(i)}
                 className="group relative block w-full overflow-hidden rounded-2xl border border-white/10 bg-ink-3 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
-                <img
+                <Img
                   src={item.src}
                   alt={`${item.title} – ${LABELS[item.category]}`}
                   loading="lazy"
-                  className="w-full transition duration-500 group-hover:scale-105"
+                  className="h-auto w-full transition duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/90 to-transparent p-3 pt-10 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
                   <p className="text-[11px] font-bold uppercase tracking-wider text-gold">{LABELS[item.category]}</p>

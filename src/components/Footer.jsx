@@ -1,12 +1,11 @@
 import { BRAND, CONTACT } from '../config.js'
-import { Instagram, Mail, WhatsApp } from './Icons.jsx'
+import { TikTok, Mail, WhatsApp } from './Icons.jsx'
 
 export default function Footer() {
   const links = [
-    CONTACT.instagram && { href: `https://instagram.com/${CONTACT.instagram}`, label: `@${CONTACT.instagram}`, Icon: Instagram },
     CONTACT.email && { href: `mailto:${CONTACT.email}`, label: CONTACT.email, Icon: Mail },
     CONTACT.whatsapp && { href: `https://wa.me/${CONTACT.whatsapp}`, label: 'WhatsApp', Icon: WhatsApp },
-    CONTACT.tiktok && { href: `https://tiktok.com/@${CONTACT.tiktok}`, label: `TikTok @${CONTACT.tiktok}` },
+    CONTACT.tiktok && { href: `https://www.tiktok.com/@${CONTACT.tiktok}`, label: `@${CONTACT.tiktok}`, Icon: TikTok },
     CONTACT.facebook && { href: CONTACT.facebook, label: 'Facebook' },
   ].filter(Boolean)
 

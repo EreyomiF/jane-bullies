@@ -1,6 +1,7 @@
 import { SERVICES, CURRENCY } from '../config.js'
 import SectionHeading from './SectionHeading.jsx'
 import { Check, ArrowRight } from './Icons.jsx'
+import Img from './Img.jsx'
 
 export default function Pricing({ onChoose }) {
   return (
@@ -27,7 +28,7 @@ export default function Pricing({ onChoose }) {
               )}
 
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
+                <Img
                   src={s.image}
                   alt={`${s.name} example`}
                   loading="lazy"

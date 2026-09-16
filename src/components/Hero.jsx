@@ -1,5 +1,6 @@
 import { SERVICES, CURRENCY } from '../config.js'
 import { ArrowRight, Sparkle } from './Icons.jsx'
+import Img from './Img.jsx'
 
 const stack = [
   { src: '/samples/stud-secret.jpg', alt: 'Secret stud banner', cls: 'left-0 top-10 w-[46%] [--r:-7deg] z-10', delay: '0s' },
@@ -14,9 +15,9 @@ export default function Hero() {
     <section id="top" className="relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pb-24">
       {/* glow background */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-neon/25 blur-[140px]" />
-        <div className="absolute top-60 -right-32 h-[26rem] w-[26rem] rounded-full bg-gold-2/20 blur-[120px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
+        <div className="absolute -top-60 left-1/2 h-[52rem] w-[52rem] -translate-x-1/2 bg-[radial-gradient(closest-side,rgba(192,38,211,0.28),transparent)]" />
+        <div className="absolute top-40 -right-60 h-[40rem] w-[40rem] bg-[radial-gradient(closest-side,rgba(245,158,11,0.2),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:22px_22px] opacity-60" />
       </div>
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
@@ -67,13 +68,14 @@ export default function Hero() {
         {/* Banner stack */}
         <div className="relative mx-auto aspect-[5/4] w-full max-w-xl">
           {stack.map((img) => (
-            <img
+            <Img
               key={img.src}
               src={img.src}
               alt={img.alt}
               style={{ animationDelay: img.delay }}
-              className={`animate-float absolute rounded-2xl border border-white/10 shadow-2xl shadow-black/70 ${img.cls}`}
+              className={`animate-float absolute rounded-2xl border border-white/10 shadow-xl shadow-black/60 will-change-transform ${img.cls}`}
               loading="eager"
+              fetchPriority="high"
             />
           ))}
         </div>

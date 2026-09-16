@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { SERVICES, CURRENCY, CONTACT, BRAND, PAYMENT_METHODS } from '../config.js'
 import SectionHeading from './SectionHeading.jsx'
-import { Check, Mail, WhatsApp, Instagram } from './Icons.jsx'
+import { Check, Mail, WhatsApp, TikTok } from './Icons.jsx'
 
 const empty = {
   dog1: '',
@@ -78,27 +78,17 @@ export default function OrderForm({ selected, onSelect }) {
     setStatus('WhatsApp opened with your order. Send it along with your photos.')
   })
 
-  const sendInstagram = withValid(async (msg) => {
-    try {
-      await navigator.clipboard.writeText(msg)
-      setStatus('Order copied! Paste it into the Instagram DM that just opened, then send your photos.')
-    } catch {
-      setStatus('Instagram opened. Send us a DM with your order details and photos.')
-    }
-    window.open(`https://ig.me/m/${CONTACT.instagram}`, '_blank', 'noopener')
-  })
 
   return (
     <section id="order" className="relative overflow-hidden py-20 sm:py-28">
-      <div aria-hidden className="pointer-events-none absolute right-0 bottom-0 h-[30rem] w-[30rem] rounded-full bg-neon/20 blur-[140px]" />
+      <div aria-hidden className="pointer-events-none absolute -right-40 -bottom-40 h-[44rem] w-[44rem] bg-[radial-gradient(closest-side,rgba(192,38,211,0.2),transparent)]" />
 
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <SectionHeading eyebrow="Order" title={<>Start your <span className="text-gold-gradient">order</span></>}>
-          Fill this in and send it to us by email{CONTACT.whatsapp ? ', WhatsApp' : ''}
-          {CONTACT.instagram ? ' or Instagram DM' : ''}. We’ll reply with next steps and payment details.
+          Fill this in and send it to us by email{CONTACT.whatsapp ? ' or WhatsApp' : ''}. We’ll reply with next steps and payment details.
         </SectionHeading>
 
-        <form onSubmit={sendEmail} noValidate className="mt-12 rounded-3xl border border-white/10 bg-ink-2/80 p-5 backdrop-blur sm:p-8">
+        <form onSubmit={sendEmail} noValidate className="mt-12 rounded-3xl border border-white/10 bg-ink-2 p-5 sm:p-8">
           {/* Service picker */}
           <fieldset>
             <legend className="text-sm font-bold text-zinc-300">1. What do you need?</legend>
@@ -157,7 +147,7 @@ export default function OrderForm({ selected, onSelect }) {
               <Field label="Kennel name" error={errors.kennel} required={isLogo}>
                 <input name="kennel" value={form.kennel} onChange={update} placeholder="e.g. Dreamville Kennels" className={inputCls} />
               </Field>
-              <Field label="Instagram / social handle to show">
+              <Field label="Your social handle to show on the design">
                 <input name="handle" value={form.handle} onChange={update} placeholder="@yourkennel" className={inputCls} />
               </Field>
               <div className="sm:col-span-2">
@@ -182,7 +172,7 @@ export default function OrderForm({ selected, onSelect }) {
               <Field label="Your name" error={errors.name} required>
                 <input name="name" value={form.name} onChange={update} autoComplete="name" className={inputCls} />
               </Field>
-              <Field label="Email, phone or Instagram" error={errors.reply} required>
+              <Field label="Email or phone" error={errors.reply} required>
                 <input name="reply" value={form.reply} onChange={update} placeholder="How should we reply?" className={inputCls} />
               </Field>
             </div>
@@ -210,11 +200,6 @@ export default function OrderForm({ selected, onSelect }) {
                   <WhatsApp /> WhatsApp
                 </button>
               )}
-              {CONTACT.instagram && (
-                <button type="button" onClick={sendInstagram} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-600 to-purple-600 px-6 py-3.5 font-extrabold text-white transition hover:brightness-110">
-                  <Instagram /> Instagram DM
-                </button>
-              )}
             </div>
           </div>
 
@@ -222,6 +207,20 @@ export default function OrderForm({ selected, onSelect }) {
             {status}
           </p>
         </form>
+
+        {CONTACT.tiktok && (
+          <p className="mt-6 text-center text-sm text-zinc-400">
+            See our latest designs on{' '}
+            <a
+              href={`https://www.tiktok.com/@${CONTACT.tiktok}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-bold text-white hover:text-gold"
+            >
+              <TikTok width="16" height="16" /> TikTok @{CONTACT.tiktok}
+            </a>
+          </p>
+        )}
       </div>
     </section>
   )

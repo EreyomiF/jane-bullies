@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Close, ChevronLeft, ChevronRight } from './Icons.jsx'
+import Img from './Img.jsx'
 
 export default function Lightbox({ items, index, labels, onClose, onChange }) {
   const item = items[index]
@@ -26,7 +27,7 @@ export default function Lightbox({ items, index, labels, onClose, onChange }) {
       role="dialog"
       aria-modal="true"
       aria-label={item.title}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
       onClick={onClose}
     >
       <button onClick={onClose} className="absolute top-4 right-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20" aria-label="Close">
@@ -40,7 +41,7 @@ export default function Lightbox({ items, index, labels, onClose, onChange }) {
         <ChevronLeft />
       </button>
       <figure className="max-h-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
-        <img src={item.src} alt={item.title} className="max-h-[80vh] w-auto rounded-xl object-contain" />
+        <Img full loading="eager" src={item.src} alt={item.title} className="max-h-[80vh] w-auto h-auto rounded-xl object-contain" />
         <figcaption className="mt-3 text-center">
           <span className="text-xs font-bold uppercase tracking-wider text-gold">{labels[item.category]}</span>
           <span className="block font-semibold text-white">{item.title}</span>

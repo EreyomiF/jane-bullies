@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { BRAND } from '../config.js'
-import { Menu, Close } from './Icons.jsx'
+import { BRAND, CONTACT } from '../config.js'
+import { Menu, Close, TikTok } from './Icons.jsx'
 
 const LINKS = [
   { href: '#pricing', label: 'Pricing' },
@@ -23,7 +23,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
-        scrolled || open ? 'bg-ink/90 backdrop-blur-md border-b border-white/5' : 'bg-transparent'
+        scrolled || open ? 'bg-ink/95 border-b border-white/5' : 'bg-transparent'
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -43,6 +43,17 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
+          {CONTACT.tiktok && (
+            <a
+              href={`https://www.tiktok.com/@${CONTACT.tiktok}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Jane Bullies on TikTok"
+              className="rounded-full p-2 text-zinc-300 transition hover:text-gold"
+            >
+              <TikTok />
+            </a>
+          )}
           <a
             href="#order"
             className="hidden rounded-full bg-gold px-5 py-2 text-sm font-extrabold text-ink transition hover:bg-yellow-300 sm:inline-block"
