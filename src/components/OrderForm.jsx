@@ -4,9 +4,11 @@ import SectionHeading from './SectionHeading.jsx'
 import { Check, Mail, WhatsApp, TikTok } from './Icons.jsx'
 
 // Orders are delivered straight to CONTACT.email by FormSubmit (https://formsubmit.co),
-// a free service that needs no account. The very first order triggers an
-// "Activate Form" email to that inbox. Click the link once and every order after that arrives.
+// a free service that needs no account. The order is sent in the background, so the
+// customer never leaves the site. The very first order triggers an "Activate Form" email to
+// that inbox. Click the link once and every order after that arrives.
 const FORM_ENDPOINT = `https://formsubmit.co/${CONTACT.email}`
+const AJAX_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT.email}`
 
 const MAX_PHOTOS = 3
 const MAX_TOTAL_MB = 10
@@ -18,12 +20,13 @@ const inputCls =
 
 const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())
 
-export default function OrderForm({ selected, onSelect }) {
+export default function OrderForm({ selected, onSelect, onSent }) {
   const [form, setForm] = useState(empty)
   const [photos, setPhotos] = useState([])
   const [errors, setErrors] = useState({})
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
+  const [sendError, setSendError] = useState(false)
   const [nextUrl, setNextUrl] = useState('')
   const photoInputs = useRef([])
 
@@ -87,12 +90,55 @@ export default function OrderForm({ selected, onSelect }) {
     return Object.keys(er).length === 0
   }
 
-  const onSubmit = (e) => {
-    if (!validate()) {
-      e.preventDefault()
-      return
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    setSendError(false)
+    if (!validate()) return
+
+    setSending(true)
+    try {
+      const res = await fetch(AJAX_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(e.currentTarget),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (res.ok && String(data.success) === 'true') {
+        const summary = {
+          design: service.name,
+          price: service.price,
+          title: orderTitle,
+          name: form.name,
+          email: form.email,
+        }
+        setForm(empty)
+        setPhotos([])
+        onSent?.(summary)
+      } else {
+        // e.g. the form hasn't been activated yet. Only the site owner sees this in the console.
+        console.warn('[Order form] FormSubmit did not accept the order:', data.message || res.status)
+        setSendError(true)
+      }
+    } catch (err) {
+      console.warn('[Order form] Network error sending order:', err)
+      setSendError(true)
+    } finally {
+      setSending(false)
     }
-    setSending(true) // let the browser post the form to FormSubmit
+  }
+
+  const fallbackMailto = () => {
+    const body = [
+      `Design: ${service.name} (${CURRENCY}${service.price})`,
+      isBreeding ? `Sire × Dam: ${form.dog1} × ${form.dog2}` : !isLogo && `Dog name: ${form.dog1}`,
+      form.kennel && `Kennel name: ${form.kennel}`,
+      form.handle && `Social handle: ${form.handle}`,
+      form.theme && `Theme / ideas: ${form.theme}`,
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      form.phone && `Phone: ${form.phone}`,
+    ].filter(Boolean).join('\n')
+    return `mailto:${CONTACT.email}?subject=${encodeURIComponent(`${service.name} order`)}&body=${encodeURIComponent(body)}`
   }
 
   const sendWhatsApp = () => {
@@ -274,6 +320,16 @@ export default function OrderForm({ selected, onSelect }) {
                 )}
               </div>
             </div>
+
+            {sendError && (
+              <div role="alert" className="mt-6 rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-200">
+                Sorry, your order couldn’t be sent just now. Please try again in a moment, or{' '}
+                <a href={fallbackMailto()} className="font-bold text-white underline">
+                  email your order to {CONTACT.email}
+                </a>{' '}
+                and attach your photos.
+              </div>
+            )}
           </form>
         )}
 
